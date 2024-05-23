@@ -24,7 +24,7 @@ function cadastrarUsuario(requisicao, resposta){
     const telefone = requisicao.bosy. telefone;
 
     //verificando se os campos foram preenchidos (não estão vazios)
-    if (nome && sobrenome && usuario && cidade && estado && cep) 
+    if (cnpj && razao_social && nome && endereco && cidade && estado && cep && email && telefone) 
     {
         listaUsuarios.push({
             cnpj: cnpj,
@@ -267,7 +267,6 @@ app.get('/listarUsuarios', (req,resp)=>{
     resp.write('<head>');
     resp.write('<title>Resultado do cadastro</title>');
     resp.write('<meta charset="utf-8">');
-    resp.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">')
     resp.write('</head>');
     resp.write('<body>');
     resp.write('<h1>Lista de Usuários</h1>');
@@ -299,8 +298,6 @@ app.get('/listarUsuarios', (req,resp)=>{
     resp.write('</table>');
     resp.write('<a href="/">Voltar</a>');
     resp.write('</body>');
-    resp.write('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>')
-    resp.write('</html>');
     resp.end();
 });
 
