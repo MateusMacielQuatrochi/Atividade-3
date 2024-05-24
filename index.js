@@ -15,21 +15,21 @@ app.use(express.static(path.join(process.cwd(), 'publico')));
 function cadastrarUsuario(requisicao, resposta){
     const cnpj = requisicao.body.cnpj;
     const razao_social = requisicao.body.razao_social;
-    const nome = requisicao.body.nome;
+    const nome_fantasia = requisicao.body.nome_fantasia;
     const endereco = requisicao.body.endereco;
     const cidade = requisicao.body.cidade;
     const estado = requisicao.body.estado;
     const cep = requisicao.body.cep;
     const email = requisicao.body.email;
-    const telefone = requisicao.bosy. telefone;
+    const telefone = requisicao.body. telefone;
 
     //verificando se os campos foram preenchidos (não estão vazios)
-    if (cnpj && razao_social && nome && endereco && cidade && estado && cep && email && telefone) 
+    if (cnpj && razao_social && nome_fantasia && endereco && cidade && estado && cep && email && telefone) 
     {
         listaUsuarios.push({
             cnpj: cnpj,
             razao_social: razao_social,
-            nome: nome,
+            nome_fantasia: nome_fantasia,
             endereco: endereco,
             cidade: cidade,
             estado: estado,
@@ -48,6 +48,8 @@ function cadastrarUsuario(requisicao, resposta){
          <meta charset="UTF-8">
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <title>Menu - APP WEB</title>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
          </head>
      </head>
      <body>
@@ -250,6 +252,9 @@ function cadastrarUsuario(requisicao, resposta){
         resposta.write(` <input type="submit" value="Enviar">
         </form>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
     </html>`);
 
         resposta.end(); //finaliza o envio da resposta!
@@ -286,7 +291,7 @@ app.get('/listarUsuarios', (req,resp)=>{
         resp.write('<tr>');
         resp.write(`<td>${listaUsuarios[i].cnpj}`);
         resp.write(`<td>${listaUsuarios[i].razao_social}`);
-        resp.write(`<td>${listaUsuarios[i].nome}`);
+        resp.write(`<td>${listaUsuarios[i].nome_fantasia}`);
         resp.write(`<td>${listaUsuarios[i].endereco}`);
         resp.write(`<td>${listaUsuarios[i].cidade}`);
         resp.write(`<td>${listaUsuarios[i].estado}`);
