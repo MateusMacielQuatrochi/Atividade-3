@@ -279,7 +279,7 @@ app.get('/listarUsuarios', (req,resp)=>{
     resp.write('</head>');
     resp.write('<body>');
     resp.write('<h1>Lista de Usuários</h1>');
-    resp.write('<table class="table table-striped">');
+    resp.write('<table class="table table-dark table-striped-columns">');
     resp.write('<tr>');
     resp.write('<th>CNPJ</th>');
     resp.write('<th>Razão Social ou Nome do Fornecedor</th>');
