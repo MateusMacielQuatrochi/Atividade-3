@@ -20,6 +20,10 @@ form {
   border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 legend {
@@ -76,7 +80,7 @@ input[type="number"]{
 }
 
 select {
-  width: 30%;
+  width: 300%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -117,8 +121,8 @@ input[type="submit"]:hover {
         <label for="cidade">Cidade:</label>
         <input type="text" id="cidade" name="cidade">
 
-        <label for="estado" class="form-label">UF</label>
-        <select class="form-select" id="estado" name="estado" required>
+        <label for="estado">UF</label>
+        <select  id="estado" name="estado" required>
             <option selected disabled value="">Escolha um estado...</option>
             <option value="AC">AC</option>
             <option value="AL">AL</option>

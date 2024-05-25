@@ -7,9 +7,8 @@ const porta = 3000;
 let listaUsuarios = [];
 
 const app = express();
-//configurar o express para manipular corretamente os dados 
-//quando eles forem submetidos via método POST
-app.use(express.urlencoded({ extended: true })); //habilita a biblioteca QueryString
+
+app.use(express.urlencoded({ extended: true })); 
 
 app.use(express.static(path.join(process.cwd(), 'publico')));
 function cadastrarUsuario(requisicao, resposta){
@@ -56,13 +55,17 @@ function cadastrarUsuario(requisicao, resposta){
      
          <style>
      form {
-       max-width: 600px;
-       margin: 40px auto;
-       padding: 40px;
-       background-color: #D3d3d3;
-       border: 1px solid #000000;
-       border-radius: 10px;
-       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 40px;
+        background-color: #D3d3d3;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 185%;
+        left: 50%;
+        transform: translate(-50%, -50%);
      }
      
      legend {
@@ -150,7 +153,7 @@ function cadastrarUsuario(requisicao, resposta){
              if (cnpj == ""){
                 resposta.write(`
                             <div m-2 class="alert alert-danger" role="alert">
-                                Por favor, informe o nome da empresa.
+                                Por favor, informe o CNPJ da empresa.
                             </div>
                 `);
             }
@@ -161,7 +164,7 @@ function cadastrarUsuario(requisicao, resposta){
         if (razao_social == ""){
             resposta.write(`
                         <div m-2 class="alert alert-danger" role="alert">
-                            Por favor, informe o nome da empresa.
+                            Por favor, informe o fornecedor da empresa.
                         </div>
             `);
         }
@@ -169,7 +172,7 @@ function cadastrarUsuario(requisicao, resposta){
         <input type="text" id="nome_fantasia" name="nome_fantasia">`);
         if (nome_fantasia == ""){
             resposta.write(`<div m-2 class="alert alert-danger" role="alert">
-                                Por favor, informe o fornecedor da empresa.
+                                Por favor, informe o nome da empresa.
                             </div>`);
         }        
         resposta.write(`
@@ -178,7 +181,7 @@ function cadastrarUsuario(requisicao, resposta){
         `);            
         if (endereco == ""){
             resposta.write(`<div class="alert alert-danger" role="alert">
-                                Por favor, informe o email da empresa.
+                                Por favor, informe o endereço da empresa.
                             </div>`);
         }
         resposta.write(`     <label for="cidade">Cidade:</label>
@@ -186,7 +189,7 @@ function cadastrarUsuario(requisicao, resposta){
         );
         if (cidade == ""){
             resposta.write(`<div class="alert alert-danger" role="alert">
-                                Por favor, informe a cidade do usuário.
+                                Por favor, informe a cidade da empresa.
                             </div>`);
         }
         resposta.write(`<label for="estado" class="form-label">UF</label>
@@ -230,7 +233,7 @@ function cadastrarUsuario(requisicao, resposta){
         <input type="number" id="cep" name="cep" maxlength="8">`);
         if (cep == ""){
             resposta.write(`<div class="alert alert-danger" role="alert">
-                                Por favor, informe o cep.
+                                Por favor, informe o CEP da empresa.
                             </div>`);
         }
 
@@ -238,14 +241,14 @@ function cadastrarUsuario(requisicao, resposta){
         <input type="email" id="email" name="email">`);
         if (email == ""){
             resposta.write(`<div class="alert alert-danger" role="alert">
-                                Por favor, informe o cep.
+                                Por favor, informe o e-mail da empresa.
                             </div>`);
         }
         resposta.write(` <label for="telefone">Telefone:</label>
-        <input type="tel" id="telefone" name="telefone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>`);
+        <input type="tel" id="telefone" name="telefone" required>`);
         if (telefone == ""){
             resposta.write(`<div class="alert alert-danger" role="alert">
-                                Por favor, informe o cep.
+                                Por favor, informe o telefone da empresa.
                             </div>`);
         }
         
@@ -260,14 +263,12 @@ function cadastrarUsuario(requisicao, resposta){
     crossorigin="anonymous"></script>
     </html>`);
 
-        resposta.end(); //finaliza o envio da resposta!
-    }//fim else
+        resposta.end(); 
+    }
 
 }
 
-//Quando um usuário enviar uma requisição do tipo POST
-//para o endpoint 'http://localhost:3000/cadastrarUsuario'
-//executa a função 'cadastrarUsuario()'
+
 app.post('/cadastrarUsuario', cadastrarUsuario);
 
 app.get('/listarUsuarios', (req,resp)=>{
@@ -278,8 +279,8 @@ app.get('/listarUsuarios', (req,resp)=>{
     resp.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">')
     resp.write('</head>');
     resp.write('<body>');
-    resp.write('<h1>Lista de Usuários</h1>');
-    resp.write('<table class="table table-dark table-striped-columns">');
+    resp.write('<h1>Lista de Empresas</h1>');
+    resp.write('<table class="table table-success table-s">');
     resp.write('<tr>');
     resp.write('<th>CNPJ</th>');
     resp.write('<th>Razão Social ou Nome do Fornecedor</th>');
@@ -305,7 +306,7 @@ app.get('/listarUsuarios', (req,resp)=>{
         resp.write('</tr>');
     }
     resp.write('</table>');
-    resp.write('<a href="/">Voltar</a>');
+    resp.write('<a class="btn btn-secondary" href="/">Voltar</a> ');
     resp.write('</body>');
     resp.end();
 });
